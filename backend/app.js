@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user')
+
 //DB CONNECTION
 mongoose.connect(process.env.DATABASE,{
     useNewUrlParser:true,
@@ -26,8 +28,8 @@ app.use(cookieParser());
 app.use(cors());
 
 //ROUTES
-app.use('/api',authRoutes);
-
+app.use('/',authRoutes);
+app.use('/',userRoutes);
 //Starting server
 app.listen(port,()=>{
     console.log(`server is up and running on ${port}`)
