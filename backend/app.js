@@ -9,6 +9,7 @@ const cors = require('cors')
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user')
+const categoryRoutes = require('./routes/category')
 
 //DB CONNECTION
 mongoose.connect(process.env.DATABASE,{
@@ -30,6 +31,7 @@ app.use(cors());
 //ROUTES
 app.use('/',authRoutes);
 app.use('/',userRoutes);
+app.use('/',categoryRoutes)
 //Starting server
 app.listen(port,()=>{
     console.log(`server is up and running on ${port}`)
