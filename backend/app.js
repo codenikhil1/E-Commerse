@@ -10,7 +10,8 @@ const cors = require('cors')
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user')
 const categoryRoutes = require('./routes/category')
-
+const productRoutes = require('./routes/product')
+const orderRoutes = require('./routes/order')
 //DB CONNECTION
 mongoose.connect(process.env.DATABASE,{
     useNewUrlParser:true,
@@ -32,6 +33,8 @@ app.use(cors());
 app.use('/',authRoutes);
 app.use('/',userRoutes);
 app.use('/',categoryRoutes)
+app.use('/',productRoutes)
+app.use('/',orderRoutes)
 //Starting server
 app.listen(port,()=>{
     console.log(`server is up and running on ${port}`)
