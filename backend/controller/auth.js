@@ -16,7 +16,7 @@ const auth = {
         const {email,password} = req.body;
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array()[0].msg });
+            return res.status(422).json({ error: errors.array()[0].msg });
         }
 
         User.findOne({email},(err,user)=>{
@@ -51,13 +51,13 @@ const auth = {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
              if (!errors.isEmpty()) {
-                 return res.status(422).json({ errors: errors.array()[0].msg });
+                 return res.status(422).json({ error: errors.array()[0].msg });
          }
         const user = new User(req.body);
         user.save((err,user)=>{
             if(err){
                 return res.status(400).json({
-                    err:"Failed to put user in DB"
+                    error:"Failed to put user in DB"
                 })
             }
             res.json({
