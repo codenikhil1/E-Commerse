@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Base from '../core/Base'
 import { isAutheticated } from '../auth/helper';
 import { Link } from 'react-router-dom';
+import adminapicall, { createCategory } from './helper/adminapicall'
 function AddCategory() {
     const [name,setName] = useState('initialState')
     const [error,setError] = useState(false)
@@ -15,6 +16,41 @@ function AddCategory() {
         </div>
 
     )
+const handlechange = event=>{
+    setError('')
+    setName(event.target.value)
+}
+const onSubmit = (event)=>{
+    event.preventDefault();
+    setError('')
+    setSuccess(false)
+
+    createCategory(user._id,token,{name})
+        .then(data=>{
+            if(data?.error){
+                setError(true)
+                setSuccess('false')
+             }else{
+                 setName('')
+                 setSuccess(true)
+                 setError(false)
+
+             }
+        })
+}
+
+const successMessage = ()=>{
+    if(success){
+        return <h4 className='text-success'>Category Created Successfully</h4>
+    }
+}
+
+const errorMessage = ()=>{
+    if(error){
+        return <h4 className='text-success'>Not able to create Category</h4>
+    }
+    
+}
     const myCategoryform = ()=>(
             <form>
                 <div className='form-group'>
@@ -23,8 +59,10 @@ function AddCategory() {
                     autoFocus
                     required
                     placeholder=' Eg .Summer'
+                    onChange={handlechange}
+                    value={name}
                     ></input>
-                    <button className='btn btn-outline-info'>
+                    <button onClick={onSubmit} className='btn btn-outline-info'>
                     Create category
                     </button>
                 </div>
@@ -35,7 +73,9 @@ function AddCategory() {
             <Base title='create new category' className='container bg-info p-4'>
                     <div className='row bg-white rounded'>
                         <div className='col-md-8 offset-md-2'>
-                            {myCategoryform()}
+                        {successMessage()}
+                        {errorMessage()}    
+                        {myCategoryform()}
                             {goBack()}
                         </div>
                     </div>
@@ -43,5 +83,4 @@ function AddCategory() {
         </div>
     )
 }
-
 export default AddCategory;

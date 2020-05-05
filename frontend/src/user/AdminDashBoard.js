@@ -16,6 +16,9 @@ const adminLeftSide = ()=>{
                     <Link to='/admin/create/category' className='nav-link text-success'> Create category</Link>
                 </li>
                 <li className='list-group-item'>
+                    <Link to='/admin/categories' className='nav-link text-success'> Manage category</Link>
+                </li>
+                <li className='list-group-item'>
                     <Link to='/admin/create/products' className='nav-link text-success'> Create product</Link>
                 </li>
                 <li className='list-group-item'>
